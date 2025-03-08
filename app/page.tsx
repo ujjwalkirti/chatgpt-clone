@@ -2,6 +2,7 @@
 
 import { useChat } from "@ai-sdk/react";
 import { useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 
 export default function Page() {
   const { messages, input, handleInputChange, handleSubmit, error } = useChat({
@@ -21,12 +22,34 @@ export default function Page() {
   }, [messages]);
 
   return (
-    <div className="px-2 h-screen">
-      <div id="messages" className="border border-gray-300 p-2 mt-2 mb-3 rounded-sm shadow-lg h-3/5 overflow-y-scroll">
+    <div className="px-2 h-screen w-full md:w-3/5 mx-auto flex flex-col justify-center">
+      <div
+        id="messages"
+        className="border border-gray-300 p-2 mt-2 mb-3 rounded-sm shadow-lg h-3/5 space-y-4 overflow-y-scroll"
+      >
         {messages.map((message) => (
-          <div key={message.id} className="p-2 w-auto">
-            {message.role === "user" ? "User: " : "AI: "}
-            {message.content}
+          <div className="pt-2 w-auto px-4">
+            <p
+              className={`text-lg font-bold ${
+                message.role === "user" ? "text-right" : "text-left"
+              }`}
+            >
+              {message.role === "user" ? "User: " : "AI: "}
+            </p>
+            <div
+              key={message.id}
+              className={`w-auto p-4 rounded-lg ${
+                message.role === "user"
+                  ? "text-right"
+                  : "text-left bg-amber-200"
+              }`}
+            >
+              {message.role === "user" ? (
+                message.content
+              ) : (
+                <ReactMarkdown>{message.content}</ReactMarkdown>
+              )}
+            </div>
           </div>
         ))}
       </div>
