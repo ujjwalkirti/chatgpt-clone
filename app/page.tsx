@@ -41,7 +41,7 @@ export default function Page() {
               className={`w-auto p-4 rounded-lg ${
                 message.role === "user"
                   ? "text-right"
-                  : "text-left bg-amber-200"
+                  : "text-left bg-gray-200"
               }`}
             >
               {message.role === "user" ? (
