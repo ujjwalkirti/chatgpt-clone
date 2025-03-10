@@ -4,7 +4,7 @@ import { streamText } from 'ai';
 // Allow responses up to 30 seconds
 export const maxDuration = 30;
 
-export function errorHandler(error: unknown) {
+function errorHandler(error: unknown) {
   if (error == null) {
     return 'unknown error';
   }
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
   const { messages } = await req.json();
 
   const result = streamText({
-    model: openai('gpt-4.5-preview'),
+    model: openai('gpt-4o'),
     messages,
   });
 
