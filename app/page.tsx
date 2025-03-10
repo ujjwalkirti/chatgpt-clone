@@ -27,8 +27,8 @@ export default function Page() {
         id="messages"
         className="border border-gray-300 p-2 mt-2 mb-3 rounded-sm shadow-lg space-y-4 overflow-y-scroll"
       >
-        {messages.map((message) => (
-          <div className="pt-2 w-auto px-4">
+        {messages.map((message, index) => (
+          <div key={`message.role${index.toString()}`} className="pt-2 w-auto px-4">
             <p
               className={`text-lg font-bold ${
                 message.role === "user" ? "text-right" : "text-left"
@@ -55,11 +55,11 @@ export default function Page() {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center gap-3 p-2 bg-gray-300 h-1/5 text-black"
+        className="flex flex-col items-center gap-3 p-2 bg-gray-600 h-1/5 text-black"
       >
         <textarea
           name="prompt"
-          className="w-full bg-white border h-[200px] p-2"
+          className="w-full border h-[200px] p-2 bg-gray-300"
           value={input}
           onChange={handleInputChange}
           placeholder="Ask me anything..."
