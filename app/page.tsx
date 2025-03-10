@@ -25,7 +25,7 @@ export default function Page() {
     <div className="px-2 h-screen w-full md:w-3/5 mx-auto flex flex-col justify-center">
       <div
         id="messages"
-        className="border border-gray-300 p-2 mt-2 mb-3 rounded-sm shadow-lg h-3/5 space-y-4 overflow-y-scroll"
+        className="border border-gray-300 p-2 mt-2 mb-3 rounded-sm shadow-lg space-y-4 overflow-y-scroll"
       >
         {messages.map((message) => (
           <div className="pt-2 w-auto px-4">
@@ -41,7 +41,7 @@ export default function Page() {
               className={`w-auto p-4 rounded-lg ${
                 message.role === "user"
                   ? "text-right"
-                  : "text-left bg-gray-200"
+                  : "text-left bg-gray-600"
               }`}
             >
               {message.role === "user" ? (
@@ -55,7 +55,7 @@ export default function Page() {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center gap-3 p-2 bg-gray-300 h-1/5"
+        className="flex flex-col items-center gap-3 p-2 bg-gray-300 h-1/5 text-black"
       >
         <textarea
           name="prompt"
