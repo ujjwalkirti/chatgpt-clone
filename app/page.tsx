@@ -2,16 +2,12 @@
 
 import { useChat } from "@ai-sdk/react";
 import { useEffect } from "react";
-import ReactMarkdown from "react-markdown";
+import MessageContainer from "./_components/MessageContainer";
 
 export default function Page() {
   const { messages, input, handleInputChange, handleSubmit, error } = useChat({
     api: "/api/chat",
   });
-
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
 
   //always scroll to latest message
   useEffect(() => {
@@ -22,37 +18,8 @@ export default function Page() {
   }, [messages]);
 
   return (
-    <div className="px-2 h-screen w-full md:w-3/5 mx-auto flex flex-col justify-center">
-      <div
-        id="messages"
-        className="border border-gray-300 p-2 mt-2 mb-3 rounded-sm shadow-lg space-y-4 overflow-y-scroll"
-      >
-        {messages.map((message, index) => (
-          <div key={`message.role${index.toString()}`} className="pt-2 w-auto px-4">
-            <p
-              className={`text-lg font-bold ${
-                message.role === "user" ? "text-right" : "text-left"
-              }`}
-            >
-              {message.role === "user" ? "User: " : "AI: "}
-            </p>
-            <div
-              key={message.id}
-              className={`w-auto p-4 rounded-lg ${
-                message.role === "user"
-                  ? "text-right"
-                  : "text-left bg-gray-600"
-              }`}
-            >
-              {message.role === "user" ? (
-                message.content
-              ) : (
-                <ReactMarkdown>{message.content}</ReactMarkdown>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className="px-2 h-screen w-full md:w-4/5 xl:w-3/5 mx-auto flex flex-col justify-center">
+      <MessageContainer messages={messages} />
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center gap-3 p-2 bg-gray-600 h-1/5 text-black"
